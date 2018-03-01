@@ -1,0 +1,112 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "indent": [
+            true,
+            "spaces",
+            4
+        ],
+        "interface-name": [
+            true,
+            "never-prefix"
+        ],
+        "max-classes-per-file": false,
+        "member-access": [
+            true,
+            "check-accessor",
+            "check-constructor",
+            "check-parameter-property"
+        ],
+        "member-ordering": [
+            "private-static-field",
+            "protected-static-field",
+            "public-static-field",
+            "private-instance-field",
+            "protected-instance-field",
+            "public-instance-field",
+            "private-constructor",
+            "protected-constructor",
+            "public-constructor",
+            "private-static-method",
+            "protected-static-method",
+            "public-static-method",
+            "private-instance-method",
+            "protected-instance-method",
+            "public-instance-method"
+        ],
+        "no-consecutive-blank-lines": [
+            true,
+            3
+        ],
+        "no-console": false,
+        "no-empty": false,
+        "no-invalid-this": true,
+        "no-shadowed-variable": false,
+        "no-unused-variable": true,
+        "object-literal-key-quotes": [
+            true,
+            "as-needed"
+        ],
+        "no-inferrable-types": [
+            true,
+            "ignore-params"
+        ],
+        "no-internal-module": true,
+        "object-literal-sort-keys": [
+            true,
+            "ignore-case",
+            "match-declaration-order",
+            "shorthand-first"
+        ],
+        "only-arrow-functions": false,
+        "quotemark": [
+            true,
+            "double",
+            "avoid-template"
+        ],
+        "semicolon": [
+            true,
+            "always",
+            "ignore-interfaces",
+            "ignore-bound-class-methods"
+        ],
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "always",
+                "asyncArrow": "always",
+                "constructor": "never",
+                "method": "never",
+                "named": "never"
+            }
+        ],
+        "triple-equals": true,
+        "unified-signatures": false,
+        "whitespace": [
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-module",
+            "check-separator",
+            "check-rest-spread",
+            "check-type",
+            "check-typecast",
+            "check-type-operator",
+            "check-preblock"
+        ],
+        "align": [
+            true,
+            "arguments",
+            "elements",
+            "members",
+            "parameters",
+            "statements"
+        ]
+    },
+    "linterOptions": {
+        "exclude": [
+            "node_modules/*"
+        ]
+    }
+}
