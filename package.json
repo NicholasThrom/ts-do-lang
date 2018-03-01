@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/NicholasThrom/ts-do-lang/issues"
   },
-  "homepage": "https://github.com/NicholasThrom/ts-do-lang#readme"
+  "homepage": "https://github.com/NicholasThrom/ts-do-lang#readme",
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
 }
