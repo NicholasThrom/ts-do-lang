@@ -1,0 +1,23 @@
+{
+  "name": "ts-do-lang",
+  "version": "0.0.0",
+  "description": "An intentionally limited language.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasThrom/ts-do-lang.git"
+  },
+  "keywords": [
+    "language",
+    "do"
+  ],
+  "author": "Nicholas Throm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicholasThrom/ts-do-lang/issues"
+  },
+  "homepage": "https://github.com/NicholasThrom/ts-do-lang#readme"
+}
