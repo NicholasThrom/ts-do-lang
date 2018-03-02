@@ -18,9 +18,9 @@
 abstract class Matcher<Type, Value> {
 
     /**
-     * The kind of match at this matcher.
+     * The kind of match at this `Matcher`.
      *
-     * If this matcher is not a match, null.
+     * If this `Matcher` is not a match, `null`.
      */
     public abstract readonly value: Value | null;
 
@@ -51,6 +51,30 @@ abstract class Matcher<Type, Value> {
         }
 
         return [matcher, index];
+
     }
 
 }
+
+/**
+ * Represents a `Matcher` that fails on any input. This is used as the end of
+ * a `Matcher` chain.
+ */
+class MatcherFinal<Type, Value> extends Matcher<Type, Value> {
+
+    /**
+     * Constructs a `MatcherFinal`.
+     *
+     * @param value The value of this matcher.
+     */
+    public constructor(public readonly value: Value | null) {
+        super();
+    }
+
+    /** @inheritDoc */
+    public step(input: Type): this | null {
+        return null;
+    }
+
+}
+
