@@ -63,8 +63,6 @@ abstract class Matcher<Type, Value> {
 class MatcherFinal<Type, Value> extends Matcher<Type, Value> {
 
     /**
-     * Constructs a `MatcherFinal`.
-     *
      * @param value The value of this matcher.
      */
     public constructor(public readonly value: Value | null) {
@@ -77,4 +75,3 @@ class MatcherFinal<Type, Value> extends Matcher<Type, Value> {
     }
 
 }
-
