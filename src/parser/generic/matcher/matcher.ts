@@ -31,7 +31,7 @@ abstract class Matcher<Type> {
      * Returns the next `Matcher` or `null`.
      *
      * If any further matches are impossible, `null` should be returned.
-     * Otherwise, a new (or cached) `Matcher` should be returned.
+     * Otherwise, a `Matcher` should be returned.
      *
      * @param input The step to the next `Matcher`
      * @returns The next `Matcher`, or `null` if the match is over.
