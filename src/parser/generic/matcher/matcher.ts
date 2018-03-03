@@ -1,47 +1,59 @@
-
 /**
  * A finite state machine used to match against arbitrary series of data.
  *
  * Similar to the build in `RegExp` type but
  * - Matches things other than strings.
- * - Can note different kinds of matches.
+ * - Is more easily extensible.
  *
  * Usage:
  * ```
- * matcher.steps([new Type('a'), new Type('a'), new Type('a')]).value)
- * // Outputs some `Value`.
+ * matcher.steps([new Type('a'), new Type('a'), new Type('a')]).doesMatch)
+ * // Outputs `true` or `false`.
  * ```
  *
- * @param Type The type of the input to match against.
- * @param Value The type that indicates the kind of match at this matcher.
+ * Note that the existence of a `Matcher` implies that some descendant `Matcher`
+ * may match. If `matcher.step` puts the matcher into a state that will never
+ * match, it should return `null`.
+ *
+ * @param Type The type of the input to match against.matcher.
  */
-abstract class Matcher<Type, Value> {
+abstract class Matcher<Type> {
 
     /**
-     * The kind of match at this `Matcher`.
+     * If this `Matcher` represents a match.
      *
-     * If this `Matcher` is not a match, `null`.
+     * The existence of this `Matcher` implies some descendant `Matcher` will
+     * have a `doesMatch` of true.
      */
-    public abstract readonly value: Value | null;
+    public abstract readonly doesMatch: boolean;
 
     /**
-     * Returns the next `Matcher`, or `null` if the match is over.
+     * Returns the next `Matcher` or `null`.
+     *
+     * If any further matches are impossible, `null` should be returned.
+     * Otherwise, a new (or cached) `Matcher` should be returned.
      *
      * @param input The step to the next `Matcher`
      * @returns The next `Matcher`, or `null` if the match is over.
      */
-    public abstract step(input: Type): this | null;
+    public abstract step(input: Type): Matcher<Type> | null;
 
     /**
-     * Returns a tuple containing the final `Matcher` and the index of the last
-     * matched entry.
+     * Returns a map containing the final non-`null` `Matcher`, the index of
+     * input that would result in the `Matcher` returning `null`, or the length
+     * of the `inputs` array otherwise.
      *
      * @param inputs The inputs over which to match.
+     * @return ```
+     *  {
+     *      matcher
      */
-    public steps(inputs: Type[]): [this, number] {
-
+    public steps(inputs: Type[]): {
+        matcher: Matcher<Type>,
+        index: number;
+    } {
         let index = 0;
-        let matcher = this;
+        let matcher: Matcher<Type> = this;
 
         for (const input of inputs) {
             const next = this.step(input);
@@ -50,8 +62,7 @@ abstract class Matcher<Type, Value> {
             index += 1;
         }
 
-        return [matcher, index];
-
+        return { matcher, index };
     }
 
 }
@@ -60,14 +71,16 @@ abstract class Matcher<Type, Value> {
  * Represents a `Matcher` that fails on any input. This is used as the end of
  * a `Matcher` chain.
  */
-class MatcherFinal<Type, Value> extends Matcher<Type, Value> {
+class FinalMatcher<Type> extends Matcher<Type> {
 
     /**
-     * @param value The value of this matcher.
+     * Constructs a `FinalMatcher`. Since the behaviour is fixed, no parameters
+     * need be supplied.
      */
-    public constructor(public readonly value: Value | null) {
-        super();
-    }
+    public constructor() { super(); }
+
+    /** @inheritDoc */
+    public readonly doesMatch = true;
 
     /** @inheritDoc */
     public step(input: Type): this | null {
@@ -75,3 +88,4 @@ class MatcherFinal<Type, Value> extends Matcher<Type, Value> {
     }
 
 }
+
