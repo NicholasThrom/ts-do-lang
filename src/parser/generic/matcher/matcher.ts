@@ -13,7 +13,7 @@
  *
  * Note that the existence of a `Matcher` implies that some descendant `Matcher`
  * may match. If `matcher.step` puts the matcher into a state that will never
- * match, it should return `null`.
+ * match, it must return `null`.
  *
  * @param Type The type of the input to match against.matcher.
  */
@@ -30,8 +30,8 @@ abstract class Matcher<Type> {
     /**
      * Returns the next `Matcher` or `null`.
      *
-     * If any further matches are impossible, `null` should be returned.
-     * Otherwise, a `Matcher` should be returned.
+     * If any further matches are impossible, `null` must be returned.
+     * Otherwise, a `Matcher` must be returned.
      *
      * @param input The step to the next `Matcher`
      * @returns The next `Matcher`, or `null` if the match is over.

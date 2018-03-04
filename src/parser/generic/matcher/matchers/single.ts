@@ -11,7 +11,7 @@ class SingleMatcher<Type> extends Matcher<Type> {
      *      A function that takes as `input` a `Type` and returns a `boolean`
      *      indicating if the `input` is acceptable.
      *
-     *      Should be pure and deterministic.
+     *      Must be pure and deterministic.
      */
     public constructor(private readonly isAccepted: (input: Type) => boolean) {
         super();
