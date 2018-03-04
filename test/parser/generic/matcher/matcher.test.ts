@@ -4,7 +4,7 @@ import * as sinon from "sinon";
 const sandbox = sinon.sandbox.create();
 
 // Subject
-import { Matcher } from "../../../../src/parser/generic/matcher/matcher";
+import { Matcher } from "parser/generic/matcher/matcher";
 
 describe("parser/generic/matcher/matcher", function () {
 

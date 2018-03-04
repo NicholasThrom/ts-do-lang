@@ -1,4 +1,4 @@
-import { Matcher } from "../matcher";
+import { Matcher } from "parser/generic/matcher/matcher";
 
 /**
  * Represents a `Matcher` that fails on any input. This is used as the end of
