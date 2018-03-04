@@ -48,7 +48,7 @@ abstract class Matcher<Type> {
      *  {
      *      matcher
      */
-    public steps(inputs: Type[]): {
+    public steps(inputs: Iterable<Type>): {
         matcher: Matcher<Type>,
         index: number;
     } {
@@ -56,7 +56,7 @@ abstract class Matcher<Type> {
         let matcher: Matcher<Type> = this;
 
         for (const input of inputs) {
-            const next = this.step(input);
+            const next = matcher.step(input);
             if (!next) { break; }
             matcher = next;
             index += 1;

@@ -4,9 +4,10 @@
   "description": "An intentionally limited language.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run -s lint && mocha",
+    "test": "npm run -s lint && npm run -s mocha",
+    "mocha": "mocha",
     "lint": "tslint --project ./tsconfig.json",
-    "coverage": "nyc npm test -s"
+    "coverage": "nyc npm run mocha -s"
   },
   "repository": {
     "type": "git",
