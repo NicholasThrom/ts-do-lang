@@ -34,13 +34,13 @@ This saves time if the length of one line changes.
 
 ## File Structure
 
-Many directories are preferable to many files in a directory.
+Many directories are preferred to many files in a directory.
 A directory with one file in it is acceptable.
 
 If the purpose of a directory isn't immediately apparent,
 place a `README.md` inside explaining it.
 
-Many files are preferable to large files.
+Many files are preferred to large files.
 
 ## Documentation Comments
 
@@ -207,4 +207,4 @@ Use the remaining lines to expand upon the first line.
 
 If changes do not fit together, put them in seperate commits.
 
-Many detailed commits is preferable to few, large commits.
+Many detailed commits are preferred to few, large commits.
