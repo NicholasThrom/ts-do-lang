@@ -4,6 +4,7 @@
   "description": "An intentionally limited language.",
   "main": "dist/index.js",
   "scripts": {
+    "build": "rm -r ./dist/* && tsc",
     "test": "npm run -s lint && npm run -s mocha",
     "mocha": "mocha",
     "lint": "tslint --project ./tsconfig.json",
