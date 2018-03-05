@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
-import * as sinon from "sinon";
-const sandbox = sinon.sandbox.create();
+import { sandbox as sandboxFactory } from "sinon";
+const sandbox = sandboxFactory.create();
 
 // Subject
 import { FinalMatcher } from "parser/generic/matcher/matchers/final";
