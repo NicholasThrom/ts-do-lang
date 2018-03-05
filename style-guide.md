@@ -193,7 +193,7 @@ describe("file/name", function () {
     });
 
     it("should exist", function () {
-        chai.assert(Subject);
+        assert(Subject);
     });
 
 });
