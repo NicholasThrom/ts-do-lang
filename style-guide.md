@@ -164,6 +164,9 @@ Each member must have its own `describe(".memberName")`.
 
 Other `describe`s may be used.
 
+`it` strings must start with the word `should`
+and end with a period.
+
 Variables must be declared inside the describe.
 The exception to this is `sandbox`,
 as it is part of the `sinon` import,
@@ -206,5 +209,7 @@ The second line must be blank.
 The remaining lines may expand upon the first line.
 
 If changes do not fit together, they must be put them in seperate commits.
+Commits may be unrelated to the current branch,
+since it is best to fix problems as they are seen.
 
 Many detailed commits are preferred to few, large commits.
