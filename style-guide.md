@@ -125,6 +125,10 @@ Words should not be shortened unless their long form would be suprising.
 For example, `init`, `url`, and `cos`
 are preferred to `initialize`, `universalResourceLocator`, and `cosine`.
 
+Since `arguments` is used by the language,
+`args` and `arg` are permitted.
+More expressive names are preferred when possible.
+
 If acronyms must be used, they should be all upper or lower case.
 
 For example, `nextURL` and `urlOfResource` are preferred to `nextUrl` and `URLOfResource`.
