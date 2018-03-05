@@ -29,7 +29,7 @@ see what the rest of the code does, make a decision, and add it to this file.
 Lines should not exceed 80 characters.
 This improves diffs.
 
-Break lines in natural places, not after 80 characters.
+Break lines in natural places, not just after 80 characters.
 This saves time if the length of one line changes.
 
 ## File Structure
@@ -50,7 +50,7 @@ More information is preferred to less information.
 
 Concise documentation comments are preferred to verbose documentation comments.
 
-Documentation comments that just restate the signature and type are ridiculous.
+Documentation comments that just restate the signature and type are useless.
 
 ### _"should"_
 
@@ -83,7 +83,7 @@ are the plural of `` `Duck` `` and `` `Goose` ``.
 
 References to parts of code should be used whenever possible.
 For example, `` If the `Animal`s `.canFly` ``
-is preferred to `If the animal can fly`.
+is preferred to `If the animals can fly`.
 
 ## Comments
 
@@ -96,7 +96,7 @@ so anyone reading comments will be familiar with plaintext markdown.
 
 Listen to `ts-lint`.
 
-If something absolutely must go against it,
+If something absolutely must go against `ts-lint`,
 [disable the specific rule](ts-lint) with a comment.
 
 [ts-lint]: https://palantir.github.io/tslint/usage/rule-flags/
@@ -125,7 +125,7 @@ Words should not be shortened unless their long form would be suprising.
 For example, `init`, `url`, and `cos`
 are preferred to `initialize`, `universalResourceLocator`, and `cosine`.
 
-If acronyms must be used, their casing should be consistent.
+If acronyms must be used, they should be all upper or lower case.
 
 For example, `nextURL` and `urlOfResource` are preferred to `nextUrl` and `URLOfResource`.
 
@@ -166,7 +166,7 @@ Other `describe`s may be used.
 
 Variables must be declared inside the describe.
 The exception to this is `sandbox`,
-as it is part of the sinon import,
+as it is part of the `sinon` import,
 and may be needed before importing the subject.
 
 To save time, this template may be used:
@@ -198,13 +198,13 @@ Commit messages serve two purposes.
 They explain lines of code in blame,
 and document the changes to the code.
 
-The first line explains every line of code changed.
+The first line of a commit message must explain every line of code changed.
 The first line must be as short as possible.
 
 The second line must be blank.
 
-Use the remaining lines to expand upon the first line.
+The remaining lines may expand upon the first line.
 
-If changes do not fit together, put them in seperate commits.
+If changes do not fit together, they must be put them in seperate commits.
 
 Many detailed commits are preferred to few, large commits.
