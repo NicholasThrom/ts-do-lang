@@ -1,6 +1,6 @@
-import { Matcher } from "../matcher";
+import { Matcher } from "parser/generic/matcher/matcher";
 
-import { FinalMatcher } from "./final";
+import { FinalMatcher } from "parser/generic/matcher/matchers/final";
 
 class SingleMatcher<Type> extends Matcher<Type> {
 
