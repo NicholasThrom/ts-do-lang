@@ -175,10 +175,10 @@ and may be needed before importing the subject.
 To save time, this template may be used:
 
 ```ts
-import * as chai from "chai";
+import { assert } from "chai";
 import "mocha";
-import * as sinon from "sinon";
-const sandbox = sinon.sandbox.create();
+import { sandbox as sandboxFactory } from "sinon";
+const sandbox = sandboxFactory.create();
 
 import { Subject } from "file/name";
 
