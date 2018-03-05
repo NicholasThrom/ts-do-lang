@@ -3,7 +3,7 @@ import "mocha";
 
 describe("test/", function () {
 
-    it("should work", function () {
+    it("should work.", function () {
         assert(true);
     });
 

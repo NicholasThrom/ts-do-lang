@@ -12,7 +12,7 @@ describe("parser/generic/matcher/matcher", function () {
         sandbox.restore();
     });
 
-    it("should exist", function () {
+    it("should exist.", function () {
         assert(Matcher);
     });
 
