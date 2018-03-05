@@ -18,7 +18,7 @@ describe("parser/generic/matcher/matcher", function () {
 
     describe(".steps()", function () {
 
-        it("should call .step on the Matcher for each entry.", function () {
+        it("should call `.step` on the `Matcher` for each entry.", function () {
             const matcher = new (class extends Matcher<number> {
                 public readonly doesMatch = true; // Irrelevant.
                 public step() { return this; }
@@ -31,7 +31,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.strictEqual(stepSpy.callCount, input.length);
         });
 
-        it("should call .step with the correct argument.", function () {
+        it("should call `.step` with the correct argument.", function () {
             const matcher = new (class extends Matcher<number> {
                 public readonly doesMatch = true; // Irrelevant.
                 public step() { return this; }
@@ -46,7 +46,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.strictEqual(stepSpy.thirdCall.args[0], input[2]);
         });
 
-        it("should return the last Matcher matched.", function () {
+        it("should return the last `Matcher` matched.", function () {
             const stringToMatch = "any string of sufficient length";
             // There should be a few fewer `Matcher`s than the string is long,
             // so the `Matcher` chain ends before the `stringToMatch` does.
@@ -70,7 +70,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.strictEqual(result.matcher, lastMatcher);
         });
 
-        it("should return the index of the failing input.", function () {
+        it("should return the `index` of the failing input.", function () {
             const input1 = [true, true, true, true, false, true, false];
             const input2 = [true, true, false, true];
             const input3 = [false, true, true, false, true, true];

@@ -18,7 +18,7 @@ describe("parser/generic/matcher/matchers/final", function () {
 
     describe(".doesMatch", function () {
 
-        it("should be true", function () {
+        it("should be `true`", function () {
             const matcher = new FinalMatcher<number>();
 
             assert.strictEqual(matcher.doesMatch, true);
@@ -28,7 +28,7 @@ describe("parser/generic/matcher/matchers/final", function () {
 
     describe(".step", function () {
 
-        it("should return null for all inputs.", function () {
+        it("should return `null` for any input.", function () {
             const matcher = new FinalMatcher<any>();
 
             assert.strictEqual(matcher.step("any input"), null);
