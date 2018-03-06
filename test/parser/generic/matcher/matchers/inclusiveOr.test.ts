@@ -132,4 +132,96 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
 
     });
 
+    describe(".step", function () {
+
+        it("should call `.step` on each `Matcher`", function () {
+            class ListeningMatcher<Type> extends Matcher<Type> {
+                public constructor(private readonly listener: () => any) { super(); }
+                public readonly doesMatch = true;
+                public step() {
+                    this.listener();
+                    return this;
+                }
+            }
+            const spies = [sandbox.spy(), sandbox.spy(), sandbox.spy(), sandbox.spy(), sandbox.spy()];
+            const matcher = new InclusiveOrMatcher<string>(
+                ...spies.map((spy) => new ListeningMatcher<string>(spy)),
+            );
+
+            matcher.step("any string");
+            assert.isTrue(spies.every((spy) => spy.calledOnce));
+        });
+
+        it("should update `.matchers` accordingly`", function () {
+            const nextMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = true;
+                public step() { return this; }
+            })();
+            const currentMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = true;
+                public step() { return nextMatcher; }
+            })();
+            const matcher = new InclusiveOrMatcher<string>(currentMatcher, currentMatcher, currentMatcher);
+
+            const result = matcher.step("any string");
+
+            assert(result instanceof InclusiveOrMatcher);
+            // Since assert does not provide type information it is explicitly specified.
+            assert.isTrue((result as InclusiveOrMatcher<string>).matchers.every((matcher) => matcher === nextMatcher));
+        });
+
+        it("should return a sub-`Matcher` if only one `Matcher` is non-`null`.", function () {
+            const nullifyingMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = true;
+                public step() { return null; }
+            })();
+            const nonNullifyingMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = true;
+                public step() { return this; }
+            })();
+            const matcher = new InclusiveOrMatcher<string>(
+                nullifyingMatcher, nonNullifyingMatcher, nullifyingMatcher,
+            );
+
+            const result = matcher.step("any string");
+
+            assert.strictEqual(result, nonNullifyingMatcher);
+        });
+
+        it("should return `null` if no `Matcher`s are non-`null`.", function () {
+            const nullifyingMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = true;
+                public step() { return null; }
+            })();
+            const matcher = new InclusiveOrMatcher<string>(
+                nullifyingMatcher, nullifyingMatcher, nullifyingMatcher,
+            );
+
+            const result = matcher.step("any string");
+
+            assert.isNull(result);
+        });
+
+        it("should return a sub-`Matcher` if only one `Matcher` exists.", function () {
+            const nonNullifyingMatcher = new (class extends Matcher<string> {
+                public readonly doesMatch = false;
+                public step() { return this; }
+            })();
+            const matcher = new InclusiveOrMatcher<string>(nonNullifyingMatcher);
+
+            const result = matcher.step("any string");
+
+            assert.strictEqual(result, nonNullifyingMatcher);
+        });
+
+        it("should return a sub-`Matcher` if no `Matcher`s exist.", function () {
+            const matcher = new InclusiveOrMatcher<string>();
+
+            const result = matcher.step("any string");
+
+            assert.isNull(result);
+        });
+
+    });
+
 });
