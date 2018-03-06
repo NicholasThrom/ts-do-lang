@@ -3,6 +3,8 @@ import "mocha";
 import { sandbox as sandboxFactory } from "sinon";
 const sandbox = sandboxFactory.create();
 
+import { Matcher } from "parser/generic/matcher/matcher";
+
 import { SingleMatcher } from "parser/generic/matcher/matchers/single";
 
 describe("parser/generic/matcher/matchers/single", function () {
@@ -13,6 +15,18 @@ describe("parser/generic/matcher/matchers/single", function () {
 
     it("should exist.", function () {
         assert(SingleMatcher);
+    });
+
+    it("should support `instanceOf SingleMatcher`", function () {
+        const matcher = new SingleMatcher<string>(() => true);
+
+        assert.isTrue(matcher instanceof SingleMatcher);
+    });
+
+    it("should support `instanceOf Matcher`", function () {
+        const matcher = new SingleMatcher<string>(() => true);
+
+        assert.isTrue(matcher instanceof Matcher);
     });
 
     describe(".doesMatch", function () {

@@ -16,6 +16,15 @@ describe("parser/generic/matcher/matcher", function () {
         assert(Matcher);
     });
 
+    it("should support `instanceof Matcher`.", function () {
+        const matcher = new (class extends Matcher<string> {
+            public readonly doesMatch = true;
+            public step() { return this; }
+        })();
+
+        assert.isTrue(matcher instanceof Matcher);
+    });
+
     describe(".steps()", function () {
 
         it("should call `.step` on the `Matcher` for each entry.", function () {

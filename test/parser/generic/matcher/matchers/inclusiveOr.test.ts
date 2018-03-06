@@ -17,6 +17,18 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
         assert(InclusiveOrMatcher);
     });
 
+    it("should support `instanceof InclusiveOrMatcher`", function () {
+        const matcher = new InclusiveOrMatcher<number>();
+
+        assert.isTrue(matcher instanceof InclusiveOrMatcher);
+    });
+
+    it("should support `instanceOf Matcher`", function () {
+        const matcher = new InclusiveOrMatcher<number>();
+
+        assert.isTrue(matcher instanceof Matcher);
+    });
+
     describe(".doesMatch", function () {
         class TrueMatcher<Type> extends Matcher<Type> {
             public readonly doesMatch = true;

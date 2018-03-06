@@ -3,7 +3,8 @@ import "mocha";
 import { sandbox as sandboxFactory } from "sinon";
 const sandbox = sandboxFactory.create();
 
-// Subject
+import { Matcher } from "parser/generic/matcher/matcher";
+
 import { FinalMatcher } from "parser/generic/matcher/matchers/final";
 
 describe("parser/generic/matcher/matchers/final", function () {
@@ -14,6 +15,18 @@ describe("parser/generic/matcher/matchers/final", function () {
 
     it("should exist.", function () {
         assert(FinalMatcher);
+    });
+
+    it("should support `instanceof InclusiveOrMatcher`", function () {
+        const matcher = new FinalMatcher<number>();
+
+        assert.isTrue(matcher instanceof FinalMatcher);
+    });
+
+    it("should support `instanceOf Matcher`", function () {
+        const matcher = new FinalMatcher<number>();
+
+        assert.isTrue(matcher instanceof Matcher);
     });
 
     describe(".doesMatch", function () {
