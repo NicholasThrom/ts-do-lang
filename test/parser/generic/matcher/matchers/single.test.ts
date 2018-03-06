@@ -15,6 +15,16 @@ describe("parser/generic/matcher/matchers/single", function () {
         assert(SingleMatcher);
     });
 
+    describe(".doesMatch", function () {
+
+        it("should be `false`", function () {
+            const matcher = new SingleMatcher<string>((input) => true);
+
+            assert.isFalse(matcher.doesMatch);
+        });
+
+    });
+
     describe(".step", function () {
 
         it("should set `.isAccepted` member to constructor argument", function () {
