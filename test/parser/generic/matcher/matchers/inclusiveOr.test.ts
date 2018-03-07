@@ -158,7 +158,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
                 public step() { return this; }
             })();
             const currentMatcher = new (class extends Matcher<string> {
-                public readonly doesMatch = true;
+                public readonly doesMatch = false;
                 public step() { return nextMatcher; }
             })();
             const matcher = new InclusiveOrMatcher<string>(currentMatcher, currentMatcher, currentMatcher);
@@ -176,7 +176,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
                 public step() { return null; }
             })();
             const nonNullifyingMatcher = new (class extends Matcher<string> {
-                public readonly doesMatch = true;
+                public readonly doesMatch = false;
                 public step() { return this; }
             })();
             const matcher = new InclusiveOrMatcher<string>(
@@ -220,6 +220,27 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             const result = matcher.step("any string");
 
             assert.isNull(result);
+        });
+
+    });
+
+    describe(".matchers", function () {
+
+        it("should equal `constructor` arguments.", function () {
+            class PlainMatcher<Type> extends Matcher<Type> {
+                public readonly doesMatch = false;
+                public step() { return this; }
+            }
+            const innerMatchers = [
+                new PlainMatcher<string>(),
+                new PlainMatcher<string>(),
+                new PlainMatcher<string>(),
+                new PlainMatcher<string>(),
+            ];
+
+            const matcher = new InclusiveOrMatcher<string>(...innerMatchers);
+
+            assert.deepEqual(matcher.matchers, innerMatchers);
         });
 
     });
