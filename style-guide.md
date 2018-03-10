@@ -52,6 +52,78 @@ Concise documentation comments are preferred to verbose documentation comments.
 
 Documentation comments that just restate the signature and type are useless.
 
+### Adjectives
+
+Some things have a few important attributes
+that can quickly be described with a few adjectives.
+
+This is the general use-case for jsdoc `@annotations`
+but unfortunately not all useful adjectives are supported.
+
+Adjectives should be added in a comma and newline seperated list
+at the top of the documentation.
+
+Each adjective should be lowercase and bold.
+
+The absence of an adjective does not imply its negation.
+
+Adjectives should be omitted if they are obvious.
+For example, a function that returns `undefined`
+need not be marked **deterministic**.
+
+If an adjective seems useful but is not in this list,
+add it to this list.
+
+**Types:**
+- **immutable**: Its members cannot be changed
+    after its construction.
+- **mutable**: Its members can be changed
+    after its construction.
+
+**Fields:**
+- **immutable**: Its value cannot be changed
+    after its contain object's construction.
+- **mutable**: Its value can be changed
+    after its contain object's construction.
+
+**Methods & Functions:**
+- **no side effects**: The method does not affect the universe
+    other than providing a return value.
+    For example: `x => 2 * x`.
+- **side effects**: The method affects the universe.
+    Side effects should be further described in documentation.
+    For example: `x => this.y = x`.
+- **deterministic**: The method returns the same value
+    given the same parameters
+    and given the same, unchanged `this`.
+    For example: `x => this.y + x`
+- **nondeterministic**: The method returns a different value
+    given the same parameters
+    and given the same, unchanged `this`.
+    For example: `x => x + Math.random()`
+- **idempotent side effects**: The method's side effects have no effect
+    when the method is called immediately following a previous call.
+    For example: `x => this.x = x`
+- **nonidempotent side effects**: The method's side effects have an effect
+    when the method is called immediately following a previous call.
+    For example: `x => this.x += x`
+- **idempotent return**: If the function is unary,
+    the function returns its first argument
+    if the first argument is a return value of the function.
+    For example: `x => Math.abs(x)`
+    If the function is 0-ary,
+    the function returns an object equivalent to its `this`,
+    if its `this` value is a return value of the function.
+    For example: `x => this.x === x ? this : new This(x)`
+- **nonidempotent return**: If the function is unary,
+    the function might not returns its first argument
+    if the first argument is a return value of the function.
+    For example: `x => x + 1`
+    If the function is 0-ary,
+    the function might not return an object equivalent to its `this`,
+    if its `this` value is a return value of the function.
+    For example: `x => this.children[x]`
+
 ### _"should"_
 
 Do not use the word _"should"_ in documentation comments;
@@ -131,7 +203,9 @@ More expressive names are preferred when possible.
 
 If acronyms must be used, they should be all upper or lower case.
 
-For example, `nextURL` and `urlOfResource` are preferred to `nextUrl` and `URLOfResource`.
+For example,
+`nextURL` and `urlOfResource`
+are preferred to `nextUrl` and `URLOfResource`.
 
 Variable names that are accessible outside the file
 in which they are declared must be descriptive without context.
