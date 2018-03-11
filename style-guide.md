@@ -242,8 +242,8 @@ Each member must have its own `describe(".memberName")`.
 
 Other `describe`s may be used.
 
-`it` strings must start with the word `should`
-and end with a period.
+`it` strings must start with the word `should`.
+`it` strings must not end with punctuation.
 
 Variables must be declared inside the describe.
 The exception to this is `sandbox`,

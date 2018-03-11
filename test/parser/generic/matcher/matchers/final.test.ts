@@ -13,7 +13,7 @@ describe("parser/generic/matcher/matchers/final", function () {
         sandbox.restore();
     });
 
-    it("should exist.", function () {
+    it("should exist", function () {
         assert(FinalMatcher);
     });
 
@@ -41,7 +41,7 @@ describe("parser/generic/matcher/matchers/final", function () {
 
     describe(".afterStep", function () {
 
-        it("should return `null` for any input.", function () {
+        it("should return `null` for any input", function () {
             const matcher = new FinalMatcher<any>();
 
             assert.strictEqual(matcher.afterStep("any input"), null);

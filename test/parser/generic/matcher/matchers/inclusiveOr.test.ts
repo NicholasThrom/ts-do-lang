@@ -40,7 +40,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             public afterStep() { return this; }
         }
 
-        it("should be `true` if the first `Matcher` `.doesMatch`.", function () {
+        it("should be `true` if the first `Matcher` `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new TrueMatcher(),
                 new FalseMatcher(),
@@ -52,7 +52,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue(matcher.doesMatch);
         });
 
-        it("should be `true` if the last `Matcher` `.doesMatch`.", function () {
+        it("should be `true` if the last `Matcher` `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new FalseMatcher(),
                 new FalseMatcher(),
@@ -64,7 +64,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue(matcher.doesMatch);
         });
 
-        it("should be `true` if any `Matcher` `.doesMatch`.", function () {
+        it("should be `true` if any `Matcher` `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new FalseMatcher(),
                 new FalseMatcher(),
@@ -76,7 +76,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue(matcher.doesMatch);
         });
 
-        it("should be `true` if all the `Matcher`s `.doesMatch`.", function () {
+        it("should be `true` if all the `Matcher`s `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new TrueMatcher(),
                 new TrueMatcher(),
@@ -86,7 +86,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue(matcher.doesMatch);
         });
 
-        it("should be `true` if the only `Matcher` `.doesMatch`.", function () {
+        it("should be `true` if the only `Matcher` `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new TrueMatcher(),
             );
@@ -94,7 +94,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue(matcher.doesMatch);
         });
 
-        it("should be `false` if the none of the `Matcher`s `.doesMatch`.", function () {
+        it("should be `false` if the none of the `Matcher`s `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new FalseMatcher(),
                 new FalseMatcher(),
@@ -106,7 +106,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isFalse(matcher.doesMatch);
         });
 
-        it("should be `false` if the none of the `Matcher`s `.doesMatch`.", function () {
+        it("should be `false` if the none of the `Matcher`s `.doesMatch`", function () {
             const matcher = new InclusiveOrMatcher(
                 new FalseMatcher(),
                 new FalseMatcher(),
@@ -118,7 +118,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isFalse(matcher.doesMatch);
         });
 
-        it("should be `false` if there are no `Matcher`s.", function () {
+        it("should be `false` if there are no `Matcher`s", function () {
             const matcher = new InclusiveOrMatcher(
                 new FalseMatcher(),
                 new FalseMatcher(),
@@ -170,7 +170,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isTrue((result as InclusiveOrMatcher<string>).matchers.every((matcher) => matcher === nextMatcher));
         });
 
-        it("should return a sub-`Matcher` if only one `Matcher` is non-`null`.", function () {
+        it("should return a sub-`Matcher` if only one `Matcher` is non-`null`", function () {
             const nullifyingMatcher = new (class extends Matcher<string> {
                 public readonly doesMatch = true;
                 public afterStep() { return null; }
@@ -188,7 +188,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.strictEqual(result, nonNullifyingMatcher);
         });
 
-        it("should return `null` if no `Matcher`s are non-`null`.", function () {
+        it("should return `null` if no `Matcher`s are non-`null`", function () {
             const nullifyingMatcher = new (class extends Matcher<string> {
                 public readonly doesMatch = true;
                 public afterStep() { return null; }
@@ -202,7 +202,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.isNull(result);
         });
 
-        it("should return a sub-`Matcher` if only one `Matcher` exists.", function () {
+        it("should return a sub-`Matcher` if only one `Matcher` exists", function () {
             const nonNullifyingMatcher = new (class extends Matcher<string> {
                 public readonly doesMatch = false;
                 public afterStep() { return this; }
@@ -214,7 +214,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
             assert.strictEqual(result, nonNullifyingMatcher);
         });
 
-        it("should return a sub-`Matcher` if no `Matcher`s exist.", function () {
+        it("should return a sub-`Matcher` if no `Matcher`s exist", function () {
             const matcher = new InclusiveOrMatcher<string>();
 
             const result = matcher.afterStep("any string");
@@ -226,7 +226,7 @@ describe("parser/generic/matcher/matchers/inclusiveOr", function () {
 
     describe(".matchers", function () {
 
-        it("should equal `constructor` arguments.", function () {
+        it("should equal `constructor` arguments", function () {
             class PlainMatcher<Type> extends Matcher<Type> {
                 public readonly doesMatch = false;
                 public afterStep() { return this; }

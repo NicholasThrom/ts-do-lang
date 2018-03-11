@@ -12,11 +12,11 @@ describe("parser/generic/matcher/matcher", function () {
         sandbox.restore();
     });
 
-    it("should exist.", function () {
+    it("should exist", function () {
         assert(Matcher);
     });
 
-    it("should support `instanceof Matcher`.", function () {
+    it("should support `instanceof Matcher`", function () {
         const matcher = new (class extends Matcher<string> {
             public readonly doesMatch = true;
             public afterStep() { return this; }
@@ -27,7 +27,7 @@ describe("parser/generic/matcher/matcher", function () {
 
     describe(".afterSteps()", function () {
 
-        it("should call `.afterStep` on the `Matcher` for each entry.", function () {
+        it("should call `.afterStep` on the `Matcher` for each entry", function () {
             const matcher = new (class extends Matcher<number> {
                 public readonly doesMatch = true;
                 public afterStep() { return this; }
@@ -40,7 +40,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.strictEqual(afterStepSpy.callCount, input.length);
         });
 
-        it("should call `.afterStep` with the correct argument.", function () {
+        it("should call `.afterStep` with the correct argument", function () {
             const matcher = new (class extends Matcher<number> {
                 public readonly doesMatch = true;
                 public afterStep() { return this; }
@@ -55,7 +55,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.strictEqual(afterStepSpy.thirdCall.args[0], input[2]);
         });
 
-        it("should return null if the `Matcher` chain ends.", function () {
+        it("should return null if the `Matcher` chain ends", function () {
             const stringToMatch = "any string of sufficient length";
             const numberOfMatchers = stringToMatch.length;
             const lastMatcher = new (class extends Matcher<string> {
@@ -77,7 +77,7 @@ describe("parser/generic/matcher/matcher", function () {
             assert.isNull(result);
         });
 
-        it("should return the last `Matcher` if the input ends.", function () {
+        it("should return the last `Matcher` if the input ends", function () {
             const stringToMatch = "any string of sufficient length";
             const numberOfMatchers = stringToMatch.length + 1;
             const lastMatcher = new (class extends Matcher<string> {

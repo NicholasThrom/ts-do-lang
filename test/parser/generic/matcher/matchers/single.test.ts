@@ -13,7 +13,7 @@ describe("parser/generic/matcher/matchers/single", function () {
         sandbox.restore();
     });
 
-    it("should exist.", function () {
+    it("should exist", function () {
         assert(SingleMatcher);
     });
 
@@ -48,7 +48,7 @@ describe("parser/generic/matcher/matchers/single", function () {
             assert.strictEqual(result["isAccepted"], isAcceptedArgument);
         });
 
-        it("should call `isAccepted` once.", function () {
+        it("should call `isAccepted` once", function () {
             const isAcceptedSpy = sandbox.spy();
             const matcher = new SingleMatcher<number>(isAcceptedSpy);
 
@@ -57,7 +57,7 @@ describe("parser/generic/matcher/matchers/single", function () {
             assert(isAcceptedSpy.calledOnce);
         });
 
-        it("should call `isAccepted` with correct argument.", function () {
+        it("should call `isAccepted` with correct argument", function () {
             const isAcceptedSpy = sandbox.spy();
             const matcher = new SingleMatcher<string>(isAcceptedSpy);
             const stepArguments = ["any", "array", "of", "anything"];
