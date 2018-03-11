@@ -39,12 +39,12 @@ describe("parser/generic/matcher/matchers/final", function () {
 
     });
 
-    describe(".step", function () {
+    describe(".afterStep", function () {
 
         it("should return `null` for any input.", function () {
             const matcher = new FinalMatcher<any>();
 
-            assert.strictEqual(matcher.step("any input"), null);
+            assert.strictEqual(matcher.afterStep("any input"), null);
         });
 
     });

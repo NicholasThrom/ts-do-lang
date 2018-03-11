@@ -16,7 +16,7 @@ class FinalMatcher<Type> extends Matcher<Type> {
     public readonly doesMatch = true;
 
     /** @inheritDoc */
-    public step(input: Type): this | null {
+    public afterStep(input: Type): this | null {
         return null;
     }
 

@@ -39,7 +39,7 @@ describe("parser/generic/matcher/matchers/single", function () {
 
     });
 
-    describe(".step", function () {
+    describe(".afterStep", function () {
 
         it("should set `.isAccepted` member to constructor argument", function () {
             const isAcceptedArgument = () => false; // Any function/
@@ -52,7 +52,7 @@ describe("parser/generic/matcher/matchers/single", function () {
             const isAcceptedSpy = sandbox.spy();
             const matcher = new SingleMatcher<number>(isAcceptedSpy);
 
-            matcher.step(0);
+            matcher.afterStep(0);
 
             assert(isAcceptedSpy.calledOnce);
         });
@@ -62,7 +62,7 @@ describe("parser/generic/matcher/matchers/single", function () {
             const matcher = new SingleMatcher<string>(isAcceptedSpy);
             const stepArguments = ["any", "array", "of", "anything"];
 
-            stepArguments.forEach((stepArgument) => matcher.step(stepArgument));
+            stepArguments.forEach((stepArgument) => matcher.afterStep(stepArgument));
 
             assert(
                 isAcceptedSpy.args.every(
@@ -76,7 +76,7 @@ describe("parser/generic/matcher/matchers/single", function () {
         it("should return null if `isAccepted` returns `false`", function () {
             const matcher = new SingleMatcher<object>((input) => false);
 
-            const result = matcher.step({ any: "object" });
+            const result = matcher.afterStep({ any: "object" });
 
             assert.isNull(result);
         });
@@ -84,7 +84,7 @@ describe("parser/generic/matcher/matchers/single", function () {
         it("should return a `Matcher` if `isAccepted` returns `true`", function () {
             const matcher = new SingleMatcher<string>((input) => true);
 
-            const result = matcher.step("any string");
+            const result = matcher.afterStep("any string");
 
             assert.isNotNull(result);
         });
@@ -92,16 +92,16 @@ describe("parser/generic/matcher/matchers/single", function () {
         it("should return a `Matcher` that `.doesMatch` if `isAccepted` returns `true`", function () {
             const matcher = new SingleMatcher<string>((input) => true);
 
-            const result = matcher.step("any string");
+            const result = matcher.afterStep("any string");
 
             assert.isTrue(result && result.doesMatch);
         });
 
-        it("should return a `Matcher` that returns `null` on any `.step`", function () {
+        it("should return a `Matcher` that returns `null` on any `.afterStep`", function () {
             const matcher = new SingleMatcher<string>((input) => true);
 
-            const intermediateMatcher = matcher.step("any string");
-            const result = intermediateMatcher && intermediateMatcher.step("any string");
+            const intermediateMatcher = matcher.afterStep("any string");
+            const result = intermediateMatcher && intermediateMatcher.afterStep("any string");
 
             assert.isNotNull(intermediateMatcher);
             assert.isNull(result);

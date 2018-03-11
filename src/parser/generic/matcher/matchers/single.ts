@@ -34,7 +34,7 @@ class SingleMatcher<Type> extends Matcher<Type> {
     public doesMatch = false;
 
     /** @inheritDoc */
-    public step(input: Type): Matcher<Type> | null {
+    public afterStep(input: Type): Matcher<Type> | null {
         return this.isAccepted(input) ? new FinalMatcher<Type>() : null;
     }
 

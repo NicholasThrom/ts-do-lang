@@ -3,7 +3,7 @@ import { Matcher } from "parser/generic/matcher/matcher";
 /**
  * Represents a `Matcher` that `.doesMatch` whenever any of the `.matchers` do.
  *
- * `.step` may return a single `Matcher` if there is only one viable `Matcher`
+ * `.afterStep` may return a single `Matcher` if there is only one viable `Matcher`
  * left.
  */
 class InclusiveOrMatcher<Type> extends Matcher<Type> {
@@ -31,9 +31,9 @@ class InclusiveOrMatcher<Type> extends Matcher<Type> {
     }
 
     /** @inheritDoc */
-    public step(input: Type): Matcher<Type> | null {
+    public afterStep(input: Type): Matcher<Type> | null {
         const newMatchers: Array<Matcher<Type>> = this.matchers
-            .map((matcher) => matcher.step(input))
+            .map((matcher) => matcher.afterStep(input))
             .filter((matcher): matcher is Matcher<Type> => matcher !== null);
 
         switch (newMatchers.length) {

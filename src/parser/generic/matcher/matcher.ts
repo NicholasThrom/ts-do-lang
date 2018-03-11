@@ -1,25 +1,40 @@
 /**
- * A finite state machine used to match against arbitrary series of data.
+ * **abstract**, **immutable**
  *
- * Similar to the build in `RegExp` type but
- * - Matches things other than strings.
- * - Is more easily extensible.
+ * Represents state in a infinite state automaton,
+ * and holds the rest of infinite state automaton.
  *
- * Usage:
- * ```
- * matcher.steps([new Type('a'), new Type('a'), new Type('a')]).doesMatch)
- * // Outputs `true` or `false`.
- * ```
+ * In most use cases, this will resemble a finite state automata,
+ * but, since states can be dynamically generated,
+ * is more powerful and can represent some languages that are not regular.
+ * (Theoretically it can match any computable language).
  *
- * Note that the existence of a `Matcher` implies that some descendant `Matcher`
- * may match. If `matcher.step` puts the matcher into a state that will never
- * match, it must return `null`.
+ * The two most important properties are `afterStep` and `doesMatch`.
  *
- * @param Type The type of the input to match against.matcher.
+ * **`afterStep`**
+ *
+ * Returns the `Matcher` that follows this given some input.
+ * For example, if some `Matcher` will match the word "javascript",
+ * the `afterStep` of "j" will be a `Matcher` that matches "avascript".
+ *
+ * ## **`doesMatch`**
+ *
+ * Returns whether the current `Matcher` is in a matching state.
+ * For example, if some `Matcher` matches "t",
+ * then the `afterStep` of "t" will be a `Matcher` that `doesMatch`.
+ *
+ * Matchers a similar to `RegExp`s, but have some main differences:
+ * - They operate on any iterable, not just strings.
+ * - They are easily extensible.
+ * - They match non-regular languages.
+ *
+ * @param Type The type of the input to match against.
  */
 abstract class Matcher<Type> {
 
     /**
+     * **immutable**
+     *
      * If this `Matcher` represents a match.
      *
      * The existence of this `Matcher` implies some descendant `Matcher` will
@@ -28,41 +43,40 @@ abstract class Matcher<Type> {
     public abstract readonly doesMatch: boolean;
 
     /**
+     * **deterministic**,
+     * **no side effects**
+     *
      * Returns the next `Matcher` or `null`.
      *
-     * If any further matches are impossible, `null` must be returned.
-     * Otherwise, a `Matcher` must be returned.
+     * If any further matches are impossible, `null` may be returned.
+     * This is not guaranteed and must not be relied upon.
+     * This may be used to quit early, or to improve readability.
      *
      * @param input The step to the next `Matcher`
      * @returns The next `Matcher`, or `null` if the match is over.
      */
-    public abstract step(input: Type): Matcher<Type> | null;
+    public abstract afterStep(input: Type): Matcher<Type> | null;
 
     /**
-     * Returns a map containing the final non-`null` `Matcher`, the index of
-     * input that would result in the `Matcher` returning `null`, or the length
-     * of the `inputs` array otherwise.
+     * **deterministic**,
+     * **no side effects**
+     *
+     * Convenience function for multiple steps.
      *
      * @param inputs The inputs over which to match.
      * @return ```
      *  {
      *      matcher
      */
-    public steps(inputs: Iterable<Type>): {
-        matcher: Matcher<Type>,
-        index: number;
-    } {
-        let index = 0;
-        let matcher: Matcher<Type> = this;
+    public afterSteps(inputs: Iterable<Type>): Matcher<Type> | null {
+        let matcher: Matcher<Type> | null = this;
 
         for (const input of inputs) {
-            const next = matcher.step(input);
-            if (!next) { break; }
-            matcher = next;
-            index += 1;
+            if (matcher === null) { break; }
+            matcher = matcher.afterStep(input);
         }
 
-        return { matcher, index };
+        return matcher;
     }
 
 }
